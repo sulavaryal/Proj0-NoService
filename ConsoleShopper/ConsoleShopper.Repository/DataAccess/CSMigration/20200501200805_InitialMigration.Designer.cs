@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleShopper.Repository.DataAccess.CSMigration
 {
     [DbContext(typeof(ConsoleShopperDbContext))]
-    [Migration("20200501194020_InitialMigration")]
+    [Migration("20200501200805_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

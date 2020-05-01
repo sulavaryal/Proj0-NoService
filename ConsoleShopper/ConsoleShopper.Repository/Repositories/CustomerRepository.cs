@@ -14,14 +14,18 @@ namespace ConsoleShopper.Repository
 
         private readonly ILogger<ICustomerRepository> _logger;
         private readonly ConsoleShopperDbContext _dbContext;
+        private DbContextOptions<ConsoleShopperDbContext> options;
+
+        public ILogger Logger { get; }
 
         // Disabled Seed data as database connection is working now. 
         //private IList<Customer> _dataSource { get; set; } = ConsoleShopperSeed.DataSource();
 
-        public CustomerRepository(ILogger<CustomerRepository> logger, ConsoleShopperDbContext dbContext)
+        public CustomerRepository(ConsoleShopperDbContext dbContext, ILogger logger)
         {
-            _logger = logger;
+            
             _dbContext = dbContext;
+            Logger = logger;
         }
 
         #region Get Customer Data (DQL)

@@ -39,6 +39,11 @@ namespace ConsoleShopper.Repository.DataAccess
             //DefaultConnection string for passworded sa connection
             //Server =.; Database = ConsoleShopperDb; User Id = sa; Password = abc123; MultipleActiveResultSets = true
             //optionsBuilder.UseSqlServer("Server=.;Database=ConsoleShopperDb;Trusted_Connection=True;MultipleActiveResultSets=true", b => b.MigrationsAssembly("ConsoleShopper.Repository"));
+
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=.");
+            }
         }
         #endregion
     }
