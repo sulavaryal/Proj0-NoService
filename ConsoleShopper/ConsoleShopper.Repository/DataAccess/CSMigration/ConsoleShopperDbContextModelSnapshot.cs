@@ -434,6 +434,242 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                         });
                 });
 
+            modelBuilder.Entity("ConsoleShopper.Domain.InventoryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset?>("Changeddate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("LoggedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("Inventory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 131, DateTimeKind.Unspecified).AddTicks(5421), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 150.55m,
+                            ProductId = 1,
+                            Quantity = 20,
+                            StoreId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2053), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 250.55m,
+                            ProductId = 2,
+                            Quantity = 20,
+                            StoreId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2094), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 350.55m,
+                            ProductId = 3,
+                            Quantity = 20,
+                            StoreId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2103), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 150.55m,
+                            ProductId = 4,
+                            Quantity = 20,
+                            StoreId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2109), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 250.55m,
+                            ProductId = 5,
+                            Quantity = 20,
+                            StoreId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2116), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 350.55m,
+                            ProductId = 6,
+                            Quantity = 20,
+                            StoreId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2122), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 150.55m,
+                            ProductId = 7,
+                            Quantity = 20,
+                            StoreId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2128), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 250.55m,
+                            ProductId = 8,
+                            Quantity = 20,
+                            StoreId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2135), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 350.55m,
+                            ProductId = 9,
+                            Quantity = 20,
+                            StoreId = 4
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2141), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 150.55m,
+                            ProductId = 10,
+                            Quantity = 20,
+                            StoreId = 5
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2147), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 250.55m,
+                            ProductId = 11,
+                            Quantity = 20,
+                            StoreId = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2153), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 350.55m,
+                            ProductId = 12,
+                            Quantity = 20,
+                            StoreId = 2
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2159), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 150.55m,
+                            ProductId = 13,
+                            Quantity = 20,
+                            StoreId = 3
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2165), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 250.55m,
+                            ProductId = 14,
+                            Quantity = 20,
+                            StoreId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2171), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 350.55m,
+                            ProductId = 15,
+                            Quantity = 20,
+                            StoreId = 5
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2177), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 150.55m,
+                            ProductId = 16,
+                            Quantity = 20,
+                            StoreId = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2183), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 250.55m,
+                            ProductId = 17,
+                            Quantity = 20,
+                            StoreId = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2189), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 350.55m,
+                            ProductId = 18,
+                            Quantity = 20,
+                            StoreId = 3
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2196), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 150.55m,
+                            ProductId = 19,
+                            Quantity = 20,
+                            StoreId = 4
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Changeddate = new DateTimeOffset(new DateTime(2020, 5, 2, 12, 42, 44, 133, DateTimeKind.Unspecified).AddTicks(2202), new TimeSpan(0, -7, 0, 0, 0)),
+                            LoggedUserId = 1,
+                            Price = 250.55m,
+                            ProductId = 20,
+                            Quantity = 20,
+                            StoreId = 5
+                        });
+                });
+
             modelBuilder.Entity("ConsoleShopper.Domain.Order", b =>
                 {
                     b.Property<int>("ID")
@@ -464,31 +700,123 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
                     b.Property<int?>("OrderID")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreLocationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderID");
 
-                    b.HasIndex("StoreLocationId");
-
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bass Guitar"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Piano"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Acoustic Guitar"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Bamboo Flute"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Accordion"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Piccolo"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Trombone"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Violin"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Guitar"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Bagpipes"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Ukulele"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Saxophone"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Kazoo"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Zither"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Banjo"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Oboe"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Wooden Flute"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Recorder"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Snare Drum"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Spoons"
+                        });
                 });
 
-            modelBuilder.Entity("ConsoleShopper.Domain.StoreLocation", b =>
+            modelBuilder.Entity("ConsoleShopper.Domain.Store", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -496,11 +824,39 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 
-                    b.ToTable("StoreLocations");
+                    b.ToTable("Stores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Florida"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "New York"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Texas"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Washington"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "California"
+                        });
                 });
 
             modelBuilder.Entity("ConsoleShopper.Domain.UserType", b =>
@@ -548,6 +904,21 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ConsoleShopper.Domain.InventoryItem", b =>
+                {
+                    b.HasOne("ConsoleShopper.Domain.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ConsoleShopper.Domain.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ConsoleShopper.Domain.Order", b =>
                 {
                     b.HasOne("ConsoleShopper.Domain.Customer", "Customer")
@@ -560,12 +931,6 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                     b.HasOne("ConsoleShopper.Domain.Order", null)
                         .WithMany("Products")
                         .HasForeignKey("OrderID");
-
-                    b.HasOne("ConsoleShopper.Domain.StoreLocation", "StoreLocation")
-                        .WithMany()
-                        .HasForeignKey("StoreLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

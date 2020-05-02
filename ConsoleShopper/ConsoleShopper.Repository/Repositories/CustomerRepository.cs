@@ -14,23 +14,19 @@ namespace ConsoleShopper.Repository
 
        
         private readonly ConsoleShopperDbContext _dbContext;
+        public ILogger _logger { get; }
 
-        public ILogger Logger { get; }
-
-        // Disabled Seed data as database connection is working now. 
-        //private IList<Customer> _dataSource { get; set; } = ConsoleShopperSeed.DataSource();
-
-        public CustomerRepository(ConsoleShopperDbContext dbContext)
+        public CustomerRepository(ConsoleShopperDbContext dbContext, ILogger logger )
         {
             
             _dbContext = dbContext;
-           
+            _logger = logger;
         }
 
         #region Get Customer Data (DQL)
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
         {
-            return await _dbContext.Customers.Select(x => x).AsNoTracking().ToListAsync();
+            return await _dbContext.Customers.Include(x=>x.CustomerAddress).Select(x => x).AsNoTracking().ToListAsync();
         }
 
         public async Task<Customer> GetCustomerByIdAsync(int id)

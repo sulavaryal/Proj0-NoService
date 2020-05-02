@@ -24,7 +24,7 @@ namespace ConsoleShopper.Repository.DataAccess
         #region Seeding User Types
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Seed();
+            modelBuilder.Seed();
         }
         #endregion
 

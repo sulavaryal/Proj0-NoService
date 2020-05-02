@@ -1,4 +1,5 @@
 ﻿using ConsoleShopper.Domain;
+using ConsoleShopper.Repository;
 using ConsoleShopper.Repository.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -51,8 +52,11 @@ namespace ConsoleShopper.Tests
                     .Include(i=>i.Store)
                     .Where(i=>i.Product.Name == "Guitar")
                     .AsNoTracking().FirstOrDefaultAsync();
+
+
                 Assert.Equal("Guitar", inventory1.Product.Name);
             }
+
         }
     }
 }

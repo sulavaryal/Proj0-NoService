@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/ConsoleShopper/ConsoleShopper.Repository/DataAccess/CSMigration/20200502194244_InitialMigration.cs
+/ConsoleShopper/ConsoleShopper.Repository/DataAccess/CSMigration/20200502194244_InitialMigration.Designer.cs

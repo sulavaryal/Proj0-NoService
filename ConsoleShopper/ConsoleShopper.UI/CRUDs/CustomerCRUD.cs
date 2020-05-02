@@ -141,26 +141,48 @@ namespace ConsoleShopper.UI
             Console.WriteLine("************************* Welcome to the Customer Creation menu ******************************\n");
             
             Console.WriteLine("Your first name will be used as the username.");
-            Console.Write("\nEnter your first name: ");
-            var firstName = Console.ReadLine();
-            Console.Write("Enter your last name: ");
-            var lastName = Console.ReadLine();
-            Console.Write("Enter your Street Address: ");
-            var street = Console.ReadLine();
-            Console.Write("Enter your City: ");
-            var city = Console.ReadLine();
-            Console.Write("Enter your State: ");
-            var state = Console.ReadLine();
-            Console.Write("Enter your Zip: ");
-            var zip = Console.ReadLine();
+            // initalizes the variable for holding user inputs. 
+            var firstName = "";
+            var lastName = "";
+            var street = "";
+            var city = "";
+            var state = "";
+            var zip = "";
+            // Check for empty inputs and prompts user again correct one. 
+            while (true) 
+            {
+                Console.Write("\nEnter your first name: ");
+                firstName = Console.ReadLine();
+                Console.Write("Enter your last name: ");
+                lastName = Console.ReadLine();
+                Console.Write("Enter your Street Address: ");
+                street = Console.ReadLine();
+                Console.Write("Enter your City: ");
+                city = Console.ReadLine();
+                Console.Write("Enter your State: ");
+                state = Console.ReadLine();
+                Console.Write("Enter your Zip: ");
+                zip = Console.ReadLine();
 
-            // Sanitize the inputs 
-            firstName = firstName.Sanitize();
-            lastName = lastName.Sanitize();
-            street = street.Sanitize();
-            city = city.Sanitize();
-            state = state.Sanitize();
-            zip = zip.Sanitize();
+                // Sanitize the inputs 
+                if (firstName.Sanitize() == "empty" || lastName.Sanitize() == "empty" || street.Sanitize() == "empty" ||
+                    city.Sanitize() == "empty" || state.Sanitize() == "empty" || zip.Sanitize() == "empty" ) 
+                {
+                    Console.WriteLine("System doesn't accept empty entries \nPlease enter again, or press Q to return to the main menu ");
+                    var keyinfo = Console.ReadKey();
+                   
+                    if (keyinfo.Key == ConsoleKey.Q) { Console.Clear(); return; }
+                    continue;
+                }
+                firstName.Sanitize();
+                lastName = lastName.Sanitize();
+                street = street.Sanitize();
+                city = city.Sanitize();
+                state = state.Sanitize();
+                zip = zip.Sanitize();
+                break;
+            }
+           
 
             var email = "";
             var phoneNumber = "";

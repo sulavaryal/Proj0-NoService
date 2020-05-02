@@ -7,8 +7,13 @@ namespace ConsoleShopper.Domain
 {
     public class Store
     {
+        public Store()
+        {
+            this.Inventory = new HashSet<InventoryItem>();
+        }
         public int Id { get; set; }
         [StringLength(128)]
         public string Name { get; set; }
+        public ICollection<InventoryItem> Inventory { get; set; }
     }
 }

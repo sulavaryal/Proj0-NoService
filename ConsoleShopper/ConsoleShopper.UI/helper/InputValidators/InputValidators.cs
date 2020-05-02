@@ -24,7 +24,7 @@ namespace ConsoleShopper.UI
             {
                 return str.Trim().ToLower();
             }
-            return "Sanitization failed.";
+            return "empty";
         }
 
         /// <summary>

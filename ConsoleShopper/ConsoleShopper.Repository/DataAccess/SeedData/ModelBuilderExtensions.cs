@@ -11,11 +11,15 @@ namespace ConsoleShopper.Repository.DataAccess
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            #region UserType Seed
             // Seed UserType data
             modelBuilder.Entity<UserType>().HasData(
                 new UserType { Id = 1, Type = "Admin" },
                 new UserType { Id = 2, Type = "Customer" }
                 );
+            #endregion
+
+            #region CustomerAddress Seed
             modelBuilder.Entity<CustomerAddress>().HasData(
                 new CustomerAddress { Id = 3, Street = "96 Franklin Ave.", City = "Fort Worth", State = "TX", Zip = "76110", CustomerId = 1 },
                 new CustomerAddress { Id = 2, Street = "17 Johnson Street", City = "Green Bay", State = "WI", Zip = "54302", CustomerId = 2 },
@@ -38,6 +42,9 @@ namespace ConsoleShopper.Repository.DataAccess
                 new CustomerAddress { Id = 19, Street = "2 State St.", City = "Saint Augustine", State = "FL", Zip = "32084", CustomerId = 19 },
                 new CustomerAddress { Id = 20, Street = "8471 East Brandywine Street", City = "Cedar Rapids", State = "AZ", Zip = "52402", CustomerId = 20 }
                 );
+            #endregion
+
+            #region Customer Seed
             // Seed Customer data
             modelBuilder.Entity<Customer>().HasData(
                 new Customer { Id = 1, FirstName = "Sulav", LastName = "Aryal", Password = "password", UserTypeId = 1},
@@ -61,6 +68,69 @@ namespace ConsoleShopper.Repository.DataAccess
                 new Customer { Id = 19, FirstName = "Rosana", LastName = "Purvis", Password = "password", UserTypeId = 2 },
                 new Customer { Id = 20, FirstName = "Serena", LastName = "San", Password = "password", UserTypeId = 2 }
             );
+            #endregion
+
+            #region Products Seed
+            // Seed Product Names
+            modelBuilder.Entity<Product>().HasData(
+                new Product { Id = 1, Name = "Bass Guitar" },
+                new Product { Id = 2, Name = "Piano" },
+                new Product { Id = 3, Name = "Acoustic Guitar" },
+                new Product { Id = 4, Name = "Bamboo Flute" },
+                new Product { Id = 5, Name = "Accordion" },
+                new Product { Id = 6, Name = "Piccolo" },
+                new Product { Id = 7, Name = "Trombone" },
+                new Product { Id = 8, Name = "Violin" },
+                new Product { Id = 9, Name = "Guitar" },
+                new Product { Id = 10, Name = "Bagpipes" },
+                new Product { Id = 11, Name = "Ukulele" },
+                new Product { Id = 12, Name = "Saxophone" },
+                new Product { Id = 13, Name = "Kazoo" },
+                new Product { Id = 14, Name = "Zither" },
+                new Product { Id = 15, Name = "Banjo" },
+                new Product { Id = 16, Name = "Oboe" },
+                new Product { Id = 17, Name = "Wooden Flute" },
+                new Product { Id = 18, Name = "Recorder" },
+                new Product { Id = 19, Name = "Snare Drum" },
+                new Product { Id = 20, Name = "Spoons" }
+              );
+            #endregion
+
+            #region Store Seed
+            modelBuilder.Entity<Store>().HasData(
+                new Store { Id = 1, Name = "Florida" },
+                new Store { Id = 2, Name = "New York" },
+                new Store { Id = 3, Name = "Texas" },
+                new Store { Id = 4, Name = "Washington" },
+                new Store { Id = 5, Name = "California" }
+               
+            );
+            #endregion
+
+            #region Inventory Seed
+            modelBuilder.Entity<InventoryItem>().HasData(
+                new InventoryItem { Id = 1, StoreId = 1, ProductId = 1, Quantity = 20, Price = 150.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 2, StoreId = 2, ProductId = 2, Quantity = 20, Price = 250.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 3, StoreId = 3, ProductId = 3, Quantity = 20, Price = 350.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 4, StoreId = 4, ProductId = 4, Quantity = 20, Price = 150.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 5, StoreId = 5, ProductId = 5, Quantity = 20, Price = 250.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 6, StoreId = 1, ProductId = 6, Quantity = 20, Price = 350.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 7, StoreId = 2, ProductId = 7, Quantity = 20, Price = 150.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 8, StoreId = 3, ProductId = 8, Quantity = 20, Price = 250.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 9, StoreId = 4, ProductId = 9, Quantity = 20, Price = 350.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 10, StoreId = 5, ProductId = 10, Quantity = 20, Price = 150.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 11, StoreId = 1, ProductId = 11, Quantity = 20, Price = 250.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 12, StoreId = 2, ProductId = 12, Quantity = 20, Price = 350.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 13, StoreId = 3, ProductId = 13, Quantity = 20, Price = 150.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 14, StoreId = 4, ProductId = 14, Quantity = 20, Price = 250.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 15, StoreId = 5, ProductId = 15, Quantity = 20, Price = 350.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 16, StoreId = 1, ProductId = 16, Quantity = 20, Price = 150.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 17, StoreId = 2, ProductId = 17, Quantity = 20, Price = 250.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 18, StoreId = 3, ProductId = 18, Quantity = 20, Price = 350.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 19, StoreId = 4, ProductId = 19, Quantity = 20, Price = 150.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() },
+                new InventoryItem { Id = 20, StoreId = 5, ProductId = 20, Quantity = 20, Price = 250.55M, LoggedUserId = 1, Changeddate = DateTime.Now.ToLocalTime() }
+                );
+            #endregion
         }
     }
 }

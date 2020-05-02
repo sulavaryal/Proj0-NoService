@@ -7,8 +7,10 @@ namespace ConsoleShopper.UI
     public static class IServiceCollectionExtension
     {
         public static IServiceCollection AddRepositoryLayerServices(this IServiceCollection services)
-        {
+        {  
             services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             return services;
         }
     }

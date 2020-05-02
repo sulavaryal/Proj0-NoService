@@ -12,15 +12,6 @@ namespace ConsoleShopper.UI
     public static class ContainerBuilder
     {
 
-        //private static IConfiguration SetupConfiguration()
-        //{
-        //    return new ConfigurationBuilder()
-        //        .SetBasePath(Directory.GetCurrentDirectory())
-        //        .AddJsonFile("appsettings.json", optional: false)
-        //        .AddEnvironmentVariables()
-        //        //.AddCommandLine(args)
-        //        .Build();
-        //}
         public static IServiceProvider Build()
         {
             // Create a list of dependencies
@@ -40,8 +31,7 @@ namespace ConsoleShopper.UI
             // from this point onwards dependencies can be added to the DI container via service collection. 
             // service collection is the bucket/container that holds all the dependencies we inject here. 
 
-            // Here we are injecting Logging service into it. 
-            //  services.AddDbContext<ConsoleShopperDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
+        
 
             // Adding DbContext into DI Container.
             services.AddDbContext<ConsoleShopperDbContext>(options => options
@@ -55,18 +45,8 @@ namespace ConsoleShopper.UI
 
             // Adding Configuration into DI Container
             services.AddSingleton<IConfiguration>(configuration);
-
-            // Adding Logging into DI Container
-            //services.AddLogging((configure) =>
-            // {
-            //     configure.ClearProviders();
-            //     configure.AddConsole();
-            //     //configure.AddConfiguration(configuration.GetSection("Logging"));
-            //     configure.SetMinimumLevel(LogLevel.Trace);
-            // });
-
-            //services.AddLogging();
-            //AddConfiguration(configuration.GetSection("Logging"))
+            
+            // Here we are injecting Logging service into it. 
 
             services.AddLogging((configure) =>
             {
