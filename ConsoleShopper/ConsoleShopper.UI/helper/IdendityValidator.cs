@@ -3,15 +3,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleShopper.UI
 {
+    
     public static class IdendityValidator
     {
+       
         static string[]  UserInput() 
         {
             string[] inputs = new string[2];
             Console.Write("\nEnter your username: ");
             inputs[0] = Console.ReadLine();
             Console.Write("Enter your password: ");
-            inputs[1] = Console.ReadLine();
+            inputs[1] = Orb.App.Console.ReadPassword(); ;
             return inputs;
         }
         public static async Task<bool> IsAdmin() 
@@ -23,6 +25,9 @@ namespace ConsoleShopper.UI
                 Console.WriteLine("Sorry you don't have the authority to do this.");
                 return false;
             }
+            
+
+
             return true;
         }
        

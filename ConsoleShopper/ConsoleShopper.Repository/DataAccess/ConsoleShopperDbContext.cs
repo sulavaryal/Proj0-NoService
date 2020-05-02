@@ -18,12 +18,13 @@ namespace ConsoleShopper.Repository.DataAccess
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<StoreLocation> StoreLocations { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<InventoryItem> Inventory { get; set; }
 
         #region Seeding User Types
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Seed();
+            //modelBuilder.Seed();
         }
         #endregion
 

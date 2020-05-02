@@ -12,20 +12,19 @@ namespace ConsoleShopper.Repository
     public class CustomerRepository : ICustomerRepository
     {
 
-        private readonly ILogger<ICustomerRepository> _logger;
+       
         private readonly ConsoleShopperDbContext _dbContext;
-        private DbContextOptions<ConsoleShopperDbContext> options;
 
         public ILogger Logger { get; }
 
         // Disabled Seed data as database connection is working now. 
         //private IList<Customer> _dataSource { get; set; } = ConsoleShopperSeed.DataSource();
 
-        public CustomerRepository(ConsoleShopperDbContext dbContext, ILogger logger)
+        public CustomerRepository(ConsoleShopperDbContext dbContext)
         {
             
             _dbContext = dbContext;
-            Logger = logger;
+           
         }
 
         #region Get Customer Data (DQL)
@@ -38,7 +37,7 @@ namespace ConsoleShopper.Repository
         {
             try
             {
-                return await _dbContext.Customers.Where(x => x.Id == id).FirstOrDefaultAsync();
+                return await _dbContext.Customers.Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception e)
             {
@@ -57,7 +56,7 @@ namespace ConsoleShopper.Repository
                 {
                     var result =  await _dbContext.Customers.Where(c => c.LastName.ToLower().Contains(searchString.ToLower()) ||
                         c.FirstName.ToUpper().Contains(searchString.ToLower()))
-                    .Select(x => x).ToListAsync();
+                    .Select(x => x).AsNoTracking().ToListAsync();
                     return result;
 
                 }
@@ -101,11 +100,15 @@ namespace ConsoleShopper.Repository
             }
         }
 
-        public async Task DeleteCustomerAsync(Customer customerToDelete)
+        public async Task DeleteCustomerAsync(int id)
         {
+            var customerToDelete = await _dbContext.Customers.
+                Include(c => c.CustomerAddress)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x=>x.Id == id);
             try
             {
-                _dbContext.Customers.Remove(customerToDelete);
+               _dbContext.Customers.Remove(customerToDelete);
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception e)
@@ -125,6 +128,8 @@ namespace ConsoleShopper.Repository
 
             if (customer != null)
             {
+                // Acts as a session holder. 
+                SessionHolder.userId = customer.Id;
                 return true;
             }
             return false;

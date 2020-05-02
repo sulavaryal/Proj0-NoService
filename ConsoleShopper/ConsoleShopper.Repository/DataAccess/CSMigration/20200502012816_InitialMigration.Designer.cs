@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleShopper.Repository.DataAccess.CSMigration
 {
     [DbContext(typeof(ConsoleShopperDbContext))]
-    [Migration("20200501200805_InitialMigration")]
+    [Migration("20200502012816_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,14 +27,6 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApartmentNo")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(128)")
@@ -56,19 +48,8 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Street")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
                     b.Property<int>("UserTypeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -239,6 +220,222 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                         });
                 });
 
+            modelBuilder.Entity("ConsoleShopper.Domain.CustomerAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("Zip")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
+
+                    b.ToTable("CustomerAddress");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            City = "Fort Worth",
+                            CustomerId = 1,
+                            State = "TX",
+                            Street = "96 Franklin Ave.",
+                            Zip = "76110"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Green Bay",
+                            CustomerId = 2,
+                            State = "WI",
+                            Street = "17 Johnson Street",
+                            Zip = "54302"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "Maplewood",
+                            CustomerId = 3,
+                            State = "NJ",
+                            Street = "752 South Main Drive",
+                            Zip = "07040"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "Gastonia",
+                            CustomerId = 4,
+                            State = "NC",
+                            Street = "7518 Sherwood Street",
+                            Zip = "28052"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            City = "Belleville",
+                            CustomerId = 5,
+                            State = "NJ",
+                            Street = "6 College St.",
+                            Zip = "07109"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            City = "Aberdeen",
+                            CustomerId = 6,
+                            State = "SD",
+                            Street = "67 Carriage Drive",
+                            Zip = "57401"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            City = "Missoula",
+                            CustomerId = 7,
+                            State = "MT",
+                            Street = "580 West Deerfield Road",
+                            Zip = "59801"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            City = "West Palm Beach",
+                            CustomerId = 8,
+                            State = "FL",
+                            Street = "37 Pilgrim Lane",
+                            Zip = "33404"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            City = "Roseville",
+                            CustomerId = 9,
+                            State = "MI",
+                            Street = "84 Woodsman St.",
+                            Zip = "48066"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            City = "Green Cove Springs",
+                            CustomerId = 10,
+                            State = "FL",
+                            Street = "89 North Devonshire Dr",
+                            Zip = "32043"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            City = "Wenatchee",
+                            CustomerId = 11,
+                            State = "WA",
+                            Street = "3 Myers Street",
+                            Zip = "98801"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            City = "Munster",
+                            CustomerId = 12,
+                            State = "IN",
+                            Street = "265 Prairie St.",
+                            Zip = "46321"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            City = "Huntington",
+                            CustomerId = 13,
+                            State = "NY",
+                            Street = "467 South Smoky Hollow St",
+                            Zip = "11743"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            City = "Meadow",
+                            CustomerId = 14,
+                            State = "NJ",
+                            Street = "48 W. Oak St.",
+                            Zip = "08003"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            City = "Lancaster",
+                            CustomerId = 15,
+                            State = "NY",
+                            Street = "41 Buckingham Ave",
+                            Zip = "14086"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            City = "Manahawkin",
+                            CustomerId = 16,
+                            State = "NJ",
+                            Street = "290 Marsh St. ",
+                            Zip = "08050"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            City = "Canandaigua",
+                            CustomerId = 17,
+                            State = "NY",
+                            Street = "206 New Saddle Ave.",
+                            Zip = "14424"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            City = "Eastpointe",
+                            CustomerId = 18,
+                            State = "MI",
+                            Street = "58 Fifth St.",
+                            Zip = "48021"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            City = "Saint Augustine",
+                            CustomerId = 19,
+                            State = "FL",
+                            Street = "2 State St.",
+                            Zip = "32084"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            City = "Cedar Rapids",
+                            CustomerId = 20,
+                            State = "AZ",
+                            Street = "8471 East Brandywine Street",
+                            Zip = "52402"
+                        });
+                });
+
             modelBuilder.Entity("ConsoleShopper.Domain.Order", b =>
                 {
                     b.Property<int>("ID")
@@ -340,6 +537,15 @@ namespace ConsoleShopper.Repository.DataAccess.CSMigration
                     b.HasOne("ConsoleShopper.Domain.UserType", "UserType")
                         .WithMany()
                         .HasForeignKey("UserTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ConsoleShopper.Domain.CustomerAddress", b =>
+                {
+                    b.HasOne("ConsoleShopper.Domain.Customer", "Customer")
+                        .WithOne("CustomerAddress")
+                        .HasForeignKey("ConsoleShopper.Domain.CustomerAddress", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

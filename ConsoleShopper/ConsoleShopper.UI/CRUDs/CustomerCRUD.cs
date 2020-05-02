@@ -13,7 +13,9 @@ namespace ConsoleShopper.UI
         // Bringing in DI container built from ContainerBuilder.cs. 
         static readonly IServiceProvider Container = ContainerBuilder.Build();
         // flag to allow or disallow GetCustomerByIdAsync to display message. 
+        // disallow if GetCustomerByIdAsync is called from other methods in this class
         bool flag = true;
+        // flag to check before setting UserType. 
         bool isAdmin = false;
 
         /// <summary>
@@ -23,6 +25,7 @@ namespace ConsoleShopper.UI
         /// <returns>Customer or null if customer not found</returns>
         public async Task<Customer> GetCustomerByIdAsync(string customerIdStringParm = "")
         {
+            // to set customerId after conversion down at line no 40. 
             int customerId = 0;
             // checks if have anything coming from parameter
             if (!string.IsNullOrEmpty(customerIdStringParm))
@@ -90,6 +93,11 @@ namespace ConsoleShopper.UI
             }
         }
 
+        /// <summary>
+        /// Returns Customer by first name or last name. 
+        /// </summary>
+        /// <param name="searchString">Optional parameter, matches any letter in the table</param>
+        /// <returns></returns>
         public async Task<IEnumerable<Customer>> GetCustomerBySearchStringAsync(string searchString = "")
         {
             Console.Write("\nEnter Customer's First Name or Last Name: ");
@@ -124,46 +132,112 @@ namespace ConsoleShopper.UI
 
             return null;
         }
+        /// <summary>
+        /// Lets user to create a account, if user has further authorization, user can create an account of admin type. 
+        /// </summary>
+        /// <returns></returns>
         public async Task CreateACustomerAsync()
         {
             Console.WriteLine("************************* Welcome to the Customer Creation menu ******************************\n");
-
-            //Check if the current user is admin or not 
-
-           
-
-            //Console.Write("\nEnter your username: ");
-            //var username = Console.ReadLine();
-            //Console.Write("Enter your password: ");
-            //var password = Console.ReadLine();
-
+            
             Console.WriteLine("Your first name will be used as the username.");
             Console.Write("\nEnter your first name: ");
             var firstName = Console.ReadLine();
             Console.Write("Enter your last name: ");
             var lastName = Console.ReadLine();
-            Console.Write("Enter your preferred password: ");
-            var password = Console.ReadLine();
+            Console.Write("Enter your Street Address: ");
+            var street = Console.ReadLine();
+            Console.Write("Enter your City: ");
+            var city = Console.ReadLine();
+            Console.Write("Enter your State: ");
+            var state = Console.ReadLine();
+            Console.Write("Enter your Zip: ");
+            var zip = Console.ReadLine();
+
+            // Sanitize the inputs 
+            firstName = firstName.Sanitize();
+            lastName = lastName.Sanitize();
+            street = street.Sanitize();
+            city = city.Sanitize();
+            state = state.Sanitize();
+            zip = zip.Sanitize();
+
+            var email = "";
+            var phoneNumber = "";
+            // password must atleast contain one digit, one upper case and one lower case with no whitespace
+            var password = "";
+            bool fromPhoneNumber = false;
+            bool fromPassword = false;
             while (true) 
             {
-                Console.Write("Enter your password again for confirmation: ");
-                var password2 = Console.ReadLine();
-                if (password != password2) 
+                if (fromPhoneNumber == false || fromPassword == false) 
                 {
-                    Console.WriteLine("Sorry your password didn't match");
-                    continue; 
+                    Console.Write("Enter your email: ");
+                    email = Console.ReadLine();
+                    // Sanitize email 
+                    email = email.Sanitize();
+                    if (!email.IsValidEmail())
+                    {
+                        Console.WriteLine("Invalid Email format");
+                        continue;
+                    }
                 }
-                else { break; }
-            }
-         
 
-            Console.Write("Are you one our staff members? Type yes and press enter if you are, otherwise press any other key to continue : ");
+                if (fromPassword == false) 
+                {
+                    Console.Write("Enter your phone no: ");
+                    phoneNumber = Console.ReadLine();
+                    // Sanitize phone number
+                    phoneNumber = phoneNumber.Sanitize();
+                    if (!phoneNumber.IsValidPhoneNumber())
+                    {
+                        Console.WriteLine("Invalid Phone number format");
+                        Console.Write($"\t123-456-7890\n\t(123) 456-7890\n\t123 456 7890\n\t123.456.7890\n\t+91 (123) 456-7890\t");
+                        fromPhoneNumber = true;
+                        continue;
+                    }
+                }
+               
+                Console.Write("Password must contain atleast contain one digit, one upper case and one lower case and no whitespace\n");
+                Console.Write("Enter your preferred password: ");
+                // Orb.App.Console.ReadPassword(), masks intput characters with * 
+                password = Orb.App.Console.ReadPassword();
+                // masks intput characters with*
+                Console.Write("Enter your password again for confirmation: ");
+                var password2 = Orb.App.Console.ReadPassword();
+
+                if (password.IsValidPassword())
+                {
+                    Console.Clear();
+                    var origRow = Console.CursorTop;
+                    var origCol = Console.CursorLeft;
+                    Console.Clear();
+                    if (password != password2)
+                    {
+                        Console.WriteLine("Sorry your password didn't match");
+                       
+                        continue;
+                    }
+                    else { break; }
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid password...");
+                    continue;
+                }
+            }
+
+            // Check if user has Admin privilege 
+            Console.Write("Are you one of our staff members? \nType yes and press enter if you are, otherwise press any other key to continue : ");
             string staffCheck = "";
             staffCheck = Console.ReadLine();
             if (staffCheck.Trim().ToLower() == "yes")
             {
                 if (!await IdendityValidator.IsAdmin())
                 {
+                    // loops through the character of string on by one and display it in the console. 
+                    // link : https://stackoverflow.com/questions/27718901/writing-one-character-at-a-time-in-a-c-sharp-console-application
+                    // author : https://stackoverflow.com/users/22656/jon-skeet
                     string text = "\nUsername and or password failed...\nPlease enter your username and password carefully next time.\nExiting to main menu now....\nAny unauthorized attempts to subvert the system will be logged and reported to the relevant authority.\n";
                     foreach (char c in text)
                     {
@@ -175,14 +249,16 @@ namespace ConsoleShopper.UI
                 else
                 { isAdmin = true; }
             }
-            
+
             if (!string.IsNullOrEmpty(firstName) &&
                 !string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(password))
             {
-               
+
                 // Create a customer from user inserted strings
-                
-                var customer = new Customer { FirstName = firstName, LastName = lastName, Password = password, UserTypeId = isAdmin ? 1: 2 };
+
+                var customerAddress = new CustomerAddress { Street = street, City = city, State = state, Zip = zip };
+                var customer = new Customer { FirstName = firstName, LastName = lastName, Password = password,Email = email,PhoneNo = phoneNumber, UserTypeId = isAdmin ? 1 : 2, CustomerAddress = customerAddress };
+
 
                 // conjure up an interface to service layer 
                 var insertCustomer = Container.GetService<ICustomerRepository>();
@@ -193,9 +269,13 @@ namespace ConsoleShopper.UI
                 Console.WriteLine($"Welcome to the Console Shopper family {firstName} {lastName}");
                 if (isAdmin) { isAdmin = false; }
             }
+            else { return; }
 
         }
-
+        /// <summary>
+        /// Lets you update Customer's details if you have necessary authorization. 
+        /// </summary>
+        /// <returns></returns>
         public async Task UpdateTheCustomerAsync()
         {
             // Customer updatedCustomer, string updatedFirstName, string updatedLastName
@@ -242,7 +322,10 @@ namespace ConsoleShopper.UI
                 }
             }
         }
-
+        /// <summary>
+        /// Deletes Customer form the database if the user has authorization. 
+        /// </summary>
+        /// <returns></returns>
         public async Task DeleteCustomerAsync()
         {
             Console.WriteLine("************************* Welcome to the Customer delete menu ******************************\n");
@@ -269,15 +352,15 @@ namespace ConsoleShopper.UI
             // Note : customerId of type string gets converted to int inside GetCustomerByIdAsync method 
             var customerToDelete = await GetCustomerByIdAsync(customerId);
 
-
+            var result1 = customerToDelete;
             var customerService = Container.GetService<ICustomerRepository>();
             if (customerToDelete != null)
             {
-                Console.WriteLine($"You sure want to delete {customerToDelete.FirstName} {customerToDelete.LastName} from db? ");
+                Console.WriteLine($"You sure want to delete {customerToDelete.FirstName} {customerToDelete.LastName} with Id {customerToDelete.Id} from db? ");
                 var result = Console.ReadLine();
                 if (result.ToLower() == "yes")
                 {
-                    await customerService.DeleteCustomerAsync(customerToDelete);
+                    await customerService.DeleteCustomerAsync(customerToDelete.Id);
                     Console.WriteLine($"{customerToDelete.FirstName} {customerToDelete.LastName} deleted.");
                 }
             }

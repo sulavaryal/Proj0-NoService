@@ -17,18 +17,10 @@ namespace ConsoleShopper.Domain
         [StringLength(128)]
         public string Password { get; set; }
 
-        [StringLength(128)]
-        public string State { get; set; }
-        [StringLength(128)]
-        public string  City{ get; set; }
-        [StringLength(128)]
-        public string  Street { get; set; }
-        [StringLength(128)]
-        public string  ApartmentNo { get; set; }
-        public string  ZipCode { get; set; }
+        public CustomerAddress CustomerAddress { get; set; }
 
         public int UserTypeId { get; set; }
-        public virtual UserType UserType { get; set; }
+        public UserType UserType { get; set; }
 
         public override string ToString()
         {

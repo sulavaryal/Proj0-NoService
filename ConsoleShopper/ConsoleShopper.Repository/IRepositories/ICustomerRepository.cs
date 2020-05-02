@@ -11,7 +11,7 @@ namespace ConsoleShopper.Repository
         Task<Customer> GetCustomerByIdAsync(int id);
         Task InsertCustomerAsync(Customer customerToInsert);
         Task UpdateCustomerAsync(Customer customerToUpdate);
-        Task DeleteCustomerAsync(Customer customerToDelete);
+        Task DeleteCustomerAsync(int id);
         Task<bool> IsAdmin(string username, string password);
     }
 }

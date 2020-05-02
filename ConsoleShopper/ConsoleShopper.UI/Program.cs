@@ -5,17 +5,16 @@ using System.Threading.Tasks;
 namespace ConsoleShopper
 {
 
-
     class Program
     {
 
         public static async Task Main(string[] args)
         {
+           
 
+            System.Console.Title = "Shoppoholic";
 
-            Console.Title = "Shoppoholic";
-
-            string title = @"
+            const string title = @"
      __      __                .__                                          
 /  \    /  \ ____     _____|  |__   ____ ______     ____   ______  _  __
 \   \/\/   // __ \   /  ___/  |  \ /  _ \\____ \   /    \ /  _ \ \/ \/ /
@@ -23,44 +22,42 @@ namespace ConsoleShopper
   \__/\  /  \___  > /____  >___|  /\____/|   __/  |___|  /\____/ \/\_/  
        \/       \/       \/     \/       |__|          \/               
 ";
-            Console.WriteLine(title);
-
 
             CustomerCRUD customerCRUD = new CustomerCRUD();
-
-
             while (true)
             {
+                System.Console.Title = "Shoppoholic";
+                Console.WriteLine(title);
 
-                Console.Write("\nPress 1 to get to the main menu, Press any other key to exit: ");
-                var input = Console.ReadLine();
+                System.Console.Write("\nPress 1 to get to the main menu, Press any other key to exit: ");
+                var input = System.Console.ReadLine();
                 if (input != "1")
                 {
 
                     // works well on windows 10 only. 
-                    Console.WriteLine("\u001b[31mAborting Shopping now...!\u001b[0m");
-                    Console.Read();
+                    System.Console.WriteLine("\u001b[31mAborting Shopping now...!\u001b[0m");
+                    System.Console.Read();
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("\n********************Welcome to the Main menu************************");
+                    System.Console.WriteLine("\n********************Welcome to the Main menu************************");
 
-                    Console.WriteLine("\nPress 1 to Search for Customer,\nPress 2 to Register as a Customer, \nPress 3 to Update Customer Details, \nPress 4 to Delete the Customer");
-                    Console.Write("\nEnter your Choice: ");
+                    System.Console.WriteLine("\nPress 1 to Search for Customer,\nPress 2 to Register as a Customer, \nPress 3 to Update Customer Details, \nPress 4 to Delete the Customer");
+                    System.Console.Write("\nEnter your Choice: ");
 
-                    input = Console.ReadLine();
+                    input = System.Console.ReadLine();
 
                     if (input == "1")
                     {
-                        //  Gives back detail of the customer whos Id is provided. 
-                        
-                        Console.WriteLine("\n*****************************Welcome to the Search menu ********************************* ");
-                        Console.WriteLine("\nPress 1 to search for Customer by Id,\nPress 2 to search Customers by Name");
+                        //  Search menu for Id wise or name wish search. 
 
-                        Console.Write("\nEnter your Choice: ");
+                        System.Console.WriteLine("\n*****************************Welcome to the Search menu ********************************* ");
+                        System.Console.WriteLine("\nPress 1 to search for Customer by Id,\nPress 2 to search Customers by Name");
 
-                        input = Console.ReadLine();
+                        System.Console.Write("\nEnter your Choice: ");
+
+                        input = System.Console.ReadLine();
                         if (input == "1")
                         {
                             try
@@ -70,7 +67,7 @@ namespace ConsoleShopper
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine(e.Message);
+                                System.Console.WriteLine(e.Message);
                             }
                         }
                         else if (input == "2")
@@ -82,7 +79,7 @@ namespace ConsoleShopper
                             catch (Exception e)
                             {
 
-                                Console.WriteLine(e.Message);
+                                System.Console.WriteLine(e.Message);
                             }
                         }
                         else { continue; }
@@ -94,11 +91,14 @@ namespace ConsoleShopper
                         // Creates a Customer
                         try
                         {
+                            int origRow = System.Console.CursorTop;
+                            int origCol = System.Console.CursorLeft;
                             await customerCRUD.CreateACustomerAsync();
+                            System.Console.SetCursorPosition(origCol, origRow);
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine(e.Message);
+                            System.Console.WriteLine(e.Message);
 
                         }
 
@@ -112,7 +112,7 @@ namespace ConsoleShopper
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine(e.Message);
+                            System.Console.WriteLine(e.Message);
 
                         }
                     }
@@ -126,7 +126,7 @@ namespace ConsoleShopper
                         catch (Exception e)
                         {
 
-                            Console.WriteLine(e.Message);
+                            System.Console.WriteLine(e.Message);
                         }
 
                     }
