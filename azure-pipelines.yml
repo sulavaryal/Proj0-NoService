@@ -14,8 +14,8 @@ stages:
     jobs:
       - job: "build"
         steps:
-          - script: dotnet build 'Project 0_Working\ConsoleShopper.UI\ConsoleShopper.UI.csproj'
+          - script: dotnet build 'ConsoleShopper\ConsoleShopper.UI\ConsoleShopper.UI.csproj'
       - job: "test"
         dependsOn: "build"
         steps:
-          - script: dotnet test 'Project 0_Working\ConsoleShopper.Tests\ConsoleShopper.Tests.csproj'
+          - script: dotnet test 'ConsoleShopper\ConsoleShopper.Tests\ConsoleShopper.Tests.csproj'
