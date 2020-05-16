@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFramework>netcoreapp3.1</TargetFramework>
-	   <ProjectGuid>7d513587-4263-4d12-9fba-d05ab60d72bb</ProjectGuid>
+	   <ProjectGuid>{7d513587-4263-4d12-9fba-d05ab60d72bb}</ProjectGuid>
 	<!--<GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>-->
   </PropertyGroup>
 
