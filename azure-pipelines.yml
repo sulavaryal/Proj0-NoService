@@ -23,10 +23,6 @@ stages:
           - script: echo 'Project built'
           - script: dotnet test --no-build 'ConsoleShopper\ConsoleShopper.Tests\ConsoleShopper.Tests.csproj'
 
-          - task: SonarCloudAnalyze@1
-      - job: 'publish'
-        dependsOn: 'build'
-        steps:
-          - script: dotnet publish 'ConsoleShopper\'ConsoleShopper.sln'
+
 
           
